@@ -123,6 +123,12 @@ h3 {
 	margin-bottom: 1em;
 }
 
+.section_subtitle_work {
+	color: var(--clr-accent);
+	font-weight: var(--fw-bold);
+	margin-bottom: 1em;
+}
+
 /* Header */
 nav {
 	display: none;
@@ -217,19 +223,73 @@ nav {
 	margin: 0 auto;
 }
 
+.about_me_img {
+	box-shadow: var(--bs);
+}
+
 @media (min-width: 600px) {
 	.about_me {
 		display: grid;
 		grid-template-columns: 1fr 200px;
+		grid-template-areas:
+			"title img"
+			"subtitle img"
+			"text img";
+		grid-column-gap: 2em;
 	}
 
-	.section_title_about,
+	.section_title_about {
+		grid-area: title;
+	}
+
 	.section_subtitle_about {
-		grid-column: 1;
+		grid-column: 1 / -1;
+		grid-row: 2;
+		position: relative;
+		left: -1em;
+		width: calc(100% + 2em);
+		padding-left: 1em;
+		padding-right: calc(200px + 4em);
 	}
 
 	.about_me_img {
-		grid-row: 1 / -1;
-		grid-column: 2;
+		grid-area: title;
+		position: relative;
+		z-index: 2;
 	}
+}
+
+ /* My work */
+.my_work {
+	background-color: var(--clr-dark);
+	color: var(--clr-light);
+	text-align: center;
+}
+
+
+.portfolio {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		
+}
+
+.portfolio_item {
+	background: var(--clr-accent);
+	overflow: hidden;
+}
+
+.portfolio_img {
+	transition: transform 750ms cubic-bezier(.5, 0, .5, 1),
+	opacity 250ms linear;
+}
+
+.portfolio_img:focus {
+	position:relative;
+	z-index: 2;
+}
+
+.portfolio_img:hover,
+.portfolio_item:focus .portfolio_img {
+	transform: scale(1.2);
+	opacity: .75;
 }
